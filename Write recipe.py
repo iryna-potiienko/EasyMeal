@@ -11,6 +11,7 @@ def save(event):
 def close(event):
     root.destroy()
 
+
 root=Tk()
 root.title('Create recipe')
 
