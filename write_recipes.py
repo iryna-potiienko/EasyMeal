@@ -1,5 +1,5 @@
 from tkinter import *
-def create_recipe():
+def create_recipe(event):
     def save(event):
         title = entry_1.get()
         file = open(title + '.txt', 'x')
@@ -7,7 +7,7 @@ def create_recipe():
         text_ingredients = text_1.get(1.0, END)
         text_cooking = text_2.get(1.0,END)
         file.write(title)
-        file.write('\n')
+        file.write('\nИнгредиенты\n')
         file.write(text_ingredients)
         file.write('\nСпособ приготовления\n')
         file.write(text_cooking)
@@ -35,16 +35,19 @@ def create_recipe():
 
     label_3 = Label(frame_1, text = 'Ингредиенты:')
     text_1 = Text(frame, width = 40, height = 20, wrap = WORD)
-    ingredients = text_1.get(1.0, END)
-    text_1.tag_add(ingredients, '1.0', END)
-    text_1.insert(1.0, ingredients)
+    #ingredients = text_1.get(1.0, END)
+    #text_1.tag_add(ingredients, '1.0', END)
+    #text_1.insert(1.0, ingredients)
+    text_1.mark_set('Ингредиенты:', 2.0)
+    text_1.mark_gravity('Ингредиенты:', LEFT)
     label_3.pack(side = LEFT)
     text_1.pack(side = LEFT)
 
     label_4 = Label(frame, text = 'Категория:')
-    var = IntVar()
+    var = StringVar()
     var.set(0)
-    category_1 = Radiobutton(frame, text = 'Салаты', variable = var, value = 0)
+    a = 'C:/Users/Iryna/PycharmProjects/IrynaPotienko/fun_food/Рецепты/Салаты'
+    category_1 = Radiobutton(frame, text = 'Салаты', variable = var, value = a)
     category_2 = Radiobutton(frame, text = 'Первые блюда', variable = var, value = 1)
     category_3 = Radiobutton(frame, text = 'Основные блюда', variable = var, value = 2)
     category_4 = Radiobutton(frame, text = 'Гарниры', variable = var, value = 3)
@@ -61,6 +64,8 @@ def create_recipe():
 
     label_5 = Label(root, text = 'Способ приготовления:')
     text_2 = Text(root, width = 80, height = 20, wrap = WORD)
+    text_2.mark_set('Способ приготовления:', 2.0)
+    text_2.mark_gravity('Способ приготовления:', RIGHT)
     label_5.pack()
     text_2.pack()
 
@@ -68,6 +73,6 @@ def create_recipe():
     button.pack(side = RIGHT)
 
     button.bind("<Button-1>", save)
-    #button.bind("<Button-1>", close)   #два действия вместе не хотят работать
+    button.bind("<Double-Button-1>", close)   #два действия вместе не хотят работать
 
     root.mainloop()
