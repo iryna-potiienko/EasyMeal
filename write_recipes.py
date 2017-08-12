@@ -1,8 +1,10 @@
 from tkinter import *
 def create_recipe(event):
+
     def save(event):
+        global title
         title = entry_1.get()
-        file = open(title + '.txt', 'x')
+        file = open(fileway + title + '.txt', 'x')
 
         text_ingredients = text_1.get(1.0, END)
         text_cooking = text_2.get(1.0,END)
@@ -44,15 +46,29 @@ def create_recipe(event):
     text_1.pack(side = LEFT)
 
     label_4 = Label(frame, text = 'Категория:')
-    var = StringVar()
+    var = IntVar()
     var.set(0)
-    a = 'C:/Users/Iryna/PycharmProjects/IrynaPotienko/fun_food/Рецепты/Салаты'
-    category_1 = Radiobutton(frame, text = 'Салаты', variable = var, value = a)
+    category_1 = Radiobutton(frame, text = 'Салаты', variable = var, value = 0)
     category_2 = Radiobutton(frame, text = 'Первые блюда', variable = var, value = 1)
     category_3 = Radiobutton(frame, text = 'Основные блюда', variable = var, value = 2)
     category_4 = Radiobutton(frame, text = 'Гарниры', variable = var, value = 3)
     category_5 = Radiobutton(frame, text = 'Десерты', variable = var, value = 4)
     category_6 = Radiobutton(frame, text = 'Напитки', variable = var, value = 5)
+    a = var.get()
+    global fileway
+    if a == 0:
+        fileway = 'Рецепты/Салаты/'
+    elif a == 1:
+        fileway = 'Рецепты/Первое блюдо/'
+    elif a == 2:
+        fileway = 'Рецепты/Основное блюдо/'
+    elif a == 3:
+        fileway = 'Рецепты/Гарниры/'
+    elif a == 4:
+        fileway = 'Рецепты/Десерты/'
+    elif a == 5:
+        fileway = 'Рецепты/Напитки/'
+
 
     label_4.pack()
     category_1.pack()

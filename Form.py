@@ -30,9 +30,10 @@ def sorting(event):
                     a = var.get()
                     sos = list
                     list = file.readline()
-                    list = list.rstrip('\n')
                     if list == 'Способ приготовления':
                          break
+                    list = list.rstrip('\n')
+
 
                     def result(event):
                          lis = Listbox(root, height=3)
@@ -54,7 +55,7 @@ def sorting(event):
 def file_title_s(event):
     global filename
     root = Toplevel()
-    mypath = 'Салаты'
+    mypath = 'Рецепты/Салаты'
     for i in listdir(mypath):
         if isfile(joinpath(mypath,i)):
             i = i[0:-4]
@@ -66,7 +67,7 @@ def file_title_s(event):
 def file_title_f(event):
     global filename
     root = Toplevel()
-    mypath = "Первое блюдо"
+    mypath = "Рецепты/Первое блюдо"
     for i in listdir(mypath):
         if isfile(joinpath(mypath,i)):
             i = i[0:-4]
@@ -77,7 +78,7 @@ def file_title_f(event):
 def file_title_o(event):
     global filename
     root = Toplevel()
-    mypath = "Основное блюдо"
+    mypath = "Рецепты/Основное блюдо"
     for i in listdir(mypath):
         if isfile(joinpath(mypath,i)):
             i = i[0:-4]
@@ -88,7 +89,7 @@ def file_title_o(event):
 def file_title_h(event):
     global filename
     root = Toplevel()
-    mypath = "Гарниры"
+    mypath = "Рецепты/Гарниры"
     for i in listdir(mypath):
         if isfile(joinpath(mypath,i)):
             i = i[0:-4]
@@ -99,7 +100,7 @@ def file_title_h(event):
 def file_title_n(event):
     global filename
     root = Toplevel()
-    mypath = "Напитки"
+    mypath = "Рецепты/Напитки"
     for i in listdir(mypath):
         if isfile(joinpath(mypath,i)):
             i = i[0:-4]
@@ -110,7 +111,7 @@ def file_title_n(event):
 def file_title_d(event):
     global filename
     root = Toplevel()
-    mypath = "Десерты"
+    mypath = "Рецепты/Десерты"
     for i in listdir(mypath):
         if isfile(joinpath(mypath, i)):
             i = i[0:-4]
