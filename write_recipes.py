@@ -18,7 +18,6 @@ def create_recipe(event):
     def close(event):
         root.destroy()
 
-
     root = Toplevel()
     root.title('Create recipe')
 
@@ -54,21 +53,6 @@ def create_recipe(event):
     category_4 = Radiobutton(frame, text = 'Гарниры', variable = var, value = 3)
     category_5 = Radiobutton(frame, text = 'Десерты', variable = var, value = 4)
     category_6 = Radiobutton(frame, text = 'Напитки', variable = var, value = 5)
-    a = var.get()
-    global fileway
-    if a == 0:
-        fileway = 'Рецепты/Салаты/'
-    elif a == 1:
-        fileway = 'Рецепты/Первое блюдо/'
-    elif a == 2:
-        fileway = 'Рецепты/Основное блюдо/'
-    elif a == 3:
-        fileway = 'Рецепты/Гарниры/'
-    elif a == 4:
-        fileway = 'Рецепты/Десерты/'
-    elif a == 5:
-        fileway = 'Рецепты/Напитки/'
-
 
     label_4.pack()
     category_1.pack()
@@ -77,6 +61,22 @@ def create_recipe(event):
     category_4.pack()
     category_5.pack()
     category_6.pack()
+
+    def category(event):
+        a = var.get()
+        global fileway
+        if a == 0:
+            fileway = 'Рецепты/Салаты/'
+        elif a == 1:
+            fileway = 'Рецепты/Первое блюдо/'
+        elif a == 2:
+            fileway = 'Рецепты/Основное блюдо/'
+        elif a == 3:
+            fileway = 'Рецепты/Гарниры/'
+        elif a == 4:
+            fileway = 'Рецепты/Десерты/'
+        elif a == 5:
+            fileway = 'Рецепты/Напитки/'
 
     label_5 = Label(root, text = 'Способ приготовления:')
     text_2 = Text(root, width = 80, height = 20, wrap = WORD)
@@ -87,6 +87,10 @@ def create_recipe(event):
 
     button = Button(root, text = 'Сохранить рецепт')
     button.pack(side = RIGHT)
+
+    button_1 = Button(frame, text = 'Ok')
+    button_1.pack()
+    button_1.bind("<Button-1>", category)
 
     button.bind("<Button-1>", save)
     button.bind("<Double-Button-1>", close)   #два действия вместе не хотят работать

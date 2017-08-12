@@ -62,7 +62,7 @@ def file_title_s(event):
             but = Button(root, text = i)
             but.bind('<Button-1>', sorting)
             but.pack()
-            filename = i
+            filename = mypath + '/' + i
 
 def file_title_f(event):
     global filename
@@ -119,7 +119,6 @@ def file_title_d(event):
             but.bind('<Button-1>', sorting)
             but.pack()
             filename = i
-
 
 def new_window(event):
     def closing(event):
