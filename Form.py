@@ -1,5 +1,4 @@
 import write_recipes
-
 from os import listdir
 from os.path import isfile
 from os.path import join as joinpath
@@ -18,42 +17,45 @@ def sorting(event):
     frame_2 = Frame(frame, height=500, width=20)
     frame_2.pack(side = LEFT)
 
-    lis = Listbox(root, height=3)
     file = open(filename + c + '.txt')
     for i, list in enumerate(file):
         if i >= 2:
             #list = file.readline()
-            #list = list.rstrip('\n')
+            list = list.rstrip('\n')
             while list :
                     if list == 'Способ приготовления:':
                         break
-                    var = IntVar()
-                    check = Checkbutton(frame_1, text=list, variable=var, onvalue=1, offvalue=0)
+                    elif list == 'Приятного аппетита!':
+                        break
+                    if len(list) > 50:
+                        break
+                    check = Button(frame_1, text=list)
                     check.pack()
-                    a = event.widget['text']
                     list = file.readline()
-
                     list = list.rstrip('\n')
-                    print(list)
 
+                    def change(event):
+                        global a
+                        event.widget['bg'] = 'red'
+                        print(event.widget['text'])
+                        text.insert(END, event.widget['text'])
+                        text.insert(END, '\n')
 
-    def buying(event):
-        global list
+                    def returning(event):
+                        event.widget['bg'] = 'blue'
+                        text.replace(event.widget['text'], "")
+                        #text.delete()
 
-        print('a=',a)
-        b = var.get()
-        print('b=',b)
-        if b == True:
-            for i in list:
-                lis.insert(END, a)
-        lis.pack()
-
+                    check.bind('<Button-1>', change)
+                    check.bind('<Double-Button-1>', returning)
     file = open(filename + c + '.txt')
     file = file.read()
     label_recipe = Label(frame_2, text = file)
-    button_ok = Button(frame_1, text='OK')
-    button_ok.bind('<Button-1>', buying)
-    button_ok.pack()
+    #button_ok = Button(frame_1, text='OK')
+    #button_ok.bind('<Button-1>', buying)
+    #button_ok.pack()
+    text = Text(frame_1)
+    text.pack()
     label_recipe.grid(row = 0, column = 0)
 
 def file_title(event):
@@ -95,7 +97,6 @@ def new_window(event):
     but6.pack()
     but7.pack()
     but8.pack()
-
 
 lab = Label(root,text='Привет, что делаем сегодня?')
 but1 = Button(root,text='готовим',width=35)
