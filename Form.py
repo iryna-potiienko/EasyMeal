@@ -1,8 +1,10 @@
+# -*- coding: utf-8 -*-
 import write_recipes
 from os import listdir
 from os.path import isfile
 from os.path import join as joinpath
-#from PIL import Image, ImageTk
+#import ImageTkInter   # Добавить гиперлынк (кнопка заказать товары)
+                                # Вставить логотип
 from tkinter import *
 
 root = Tk()
@@ -20,33 +22,46 @@ def sorting(event):
     '''Функция которая открывает дочернее окно с рецептом и выборкой ингредиентов'''
     def exit(event):
         root.quit()
+    def buy_products(event):
+        a = text.get(1.0, END)
+        import webbrowser
+        webbrowser.open("http://fozzyshop.com.ua/?gclid=Cj0KEQjwt8rMBRDOqoKWjJfd_LABEiQA2F2biNjCv--MPLRGy1nptmCIxjSKk0_ainr1oZNGxWgdOwAaAiev8P8HAQ")
     global list, a, sos, b
     c = event.widget['text']
     root = Toplevel()
-    root.geometry('1200x800')
+    root.iconbitmap('logo end.png')
+    root.title('EasyMeal')
+    root.wm_state('zoomed')
     frame = Frame(root, height = 1000, width = 20)
-    frame.pack()
+    frame.pack(side = LEFT)
     frame_1 = Frame(frame, height=500, width=20)
     frame_1.pack(side = LEFT)
-    frame_2 = Frame(frame, height=500, width=20)
-    frame_2.pack(side = LEFT)
+    #frame_2 = Frame(frame, height=500, width=20)
+    #frame_2.pack(side = LEFT)
+    label = Label(frame_1, text='Кликните на ингредиенты которих у вас нету:', font='Calibri 14 italic')
+    # label.place(x = 50, y = 20)
+    label.pack()
 
     file = open(filename + c + '.txt')
-    for i, list in enumerate(file):
-        if i >= 2:              # чтение файла начиная со второй строчки
-            #list = file.readline()
-            list = list.rstrip('\n')
-            while list :   # цикл для определения какие продукты есть для приготовления, а каких нету
-                    if list == 'Способ приготовления:':
-                        break
-                    elif list == 'Приятного аппетита!' or list == 'Приятного апетита!' or list == 'Приятного аппетита':
-                        break
-                    if len(list) > 50:
-                        break
-                    check = Button(frame_1, text=list, width = 40, bg = '#3dbde0', font = 'Calibri 14 italic')
+    #a = file.readline(1.0)
+    #file.delete(1.0, 2.0)
+    #for i, list in enumerate(file):
+     #   if i >= 2:              # чтение файла начиная со второй строчки
+    a = file.readlines(12)
+    b = file.readlines(1)
+    list = file.readline()
+    list = list.rstrip('\n')
+
+    while list != '':   # цикл для определения какие продукты есть для приготовления, а каких нету
+                    if list == a or list == b:
+                        lab = Label(root)
+                    if list[0:2:1] == 'Для':
+                        lab1 = Label()
+                    check = Button(frame_1, text=list, width = 60, bg = '#3dbde0', font = 'Calibri 13 italic')
                     check.pack()
                     list = file.readline()
                     list = list.rstrip('\n')
+
 
                     def change(event):   # при нажатии на кнопку она станет красной и продукт появится в текстовом поле внизу
                         global a
@@ -55,7 +70,7 @@ def sorting(event):
                         text.insert(END, event.widget['text'])
                         text.insert(END, '\n')
 
-                    def returning(event):   # при двойном нажатии на кнопку она отменит функцию change()
+                    def returning(event):   # при двойном нажатии на кнопку функция отменит функцию change()
                         event.widget['bg'] = '#3dbde0'
                         text.replace(event.widget['text'], "")
                         #text.delete()
@@ -64,19 +79,23 @@ def sorting(event):
                     check.bind('<Double-Button-1>', returning)
     file = open(filename + c + '.txt')
     file = file.read()
-    text_recipe = Text(frame_2, wrap = WORD)
+    text_recipe = Text(root, wrap = WORD, width = 80, height = 40)
     text_recipe.insert(1.0, file)
     button_ok = Button(root, text='Выйти', bg = '#3dbde0', font = 'Calibri 14 bold')
     button_ok.bind('<Button-1>', exit)
     button_ok.place(x = 1100, y = 750)
     text = Text(frame_1, width = 55, height = 13)
     text.pack()
-    text_recipe.grid(row = 0, column = 0)
+    text_recipe.place(x = 750, y = 50)
+    button_search = Button(root, text = 'Заказать недостающие продукты', bg = '#3dbde0', font = 'Calibri 14 bold')
+    button_search.bind('<Button-1>', buy_products)
+    button_search.place(x = 1100, y= 800)
 
 def file_title(event):
     '''Функция которая показывает список текстовых файлов в папке - список рецептов выбранной категории'''
     global filename
     root = Toplevel()
+    root.title('EasyMeal')
     root.geometry('500x540')
     #frame1 = Frame(root, width = 700, height = 0)
     #frame1.pack()
@@ -98,14 +117,17 @@ def file_title(event):
     frame2.pack()
 
 def new_window(event):
+    '''Функция которая открывает окно с рецептами'''
     def closing(event):
         window.destroy()
     window = Toplevel(root)
+    root.title('EasyMeal')
     window.geometry('620x450')
     window['bg'] = '#3dbde0'
     frame = Frame(window, width = 620, height = 350)
     frame.pack()
-    lab1 = Label(window, text='Что вы хотите приготовить сегодня?', font = 'Calibri 20 bold italic')
+    lab1 = Label(window, font = 'Calibri 20 bold italic', text=''' Хорошо, мы будем готовить! 
+    Что мы хотим приготовить сегодня?''')
     but3 = Button(window, text='Салаты', width=15, height = 2, bg = '#3dbde0', font = 'Calibri 15 bold italic')
     but4 = Button(window, text='Первое блюдо', width=15, height = 2, bg = '#3dbde0', font = 'Calibri 15 bold italic')
     but5 = Button(window, text='Основное блюдо', width=15, height = 2, bg = '#3dbde0', font = 'Calibri 15 bold italic')
@@ -121,7 +143,7 @@ def new_window(event):
     but8.bind('<Button-1>', file_title)
 
     #but3.bind('<Button-1>', closing)
-    lab1.place(x = 80, y = 50)
+    lab1.place(x = 75, y = 40)
     but3.place(x = 30, y = 220)
     but4.place(x = 30, y = 120)
     but5.place(x = 230, y = 120)

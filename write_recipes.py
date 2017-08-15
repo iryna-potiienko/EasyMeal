@@ -38,7 +38,7 @@ def create_recipe(event):
 
     root = Toplevel()
     root.geometry('800x800+200+0')
-    root.title('Create recipe')
+    root.title('EasyMeal')
 
     label_1 = Label(root, text = 'Название рецепта:', font = 'Calibri 13 bold italic')
     entry_1 = Entry(root, width = 50)
