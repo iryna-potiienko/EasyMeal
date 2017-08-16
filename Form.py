@@ -5,7 +5,7 @@ from os.path import isfile
 from os.path import join as joinpath
 #import ImageTkInter   # Добавить гиперлынк (кнопка заказать товары)
                                 # Вставить логотип
-from tkinter import *
+from tkinter import *       # Проблемы с расширением
 
 root = Tk()
 root.title('EasyMeal')
@@ -31,13 +31,17 @@ def sorting(event):
     root = Toplevel()
     #root.iconbitmap('logo end.png')
     root.title('EasyMeal')
-    root.wm_state('zoomed')
+    root.geometry('1400x800+0+0')
+    fram = Frame(root, width = 1700, height = 50, bg = 'black')
+    fram.pack()
+    fram_1 = Frame(root, width = 100, height = 1000)
+    fram_1.pack(side = LEFT)
     frame = Frame(root, height = 1000, width = 20)
     frame.pack(side = LEFT)
     frame_1 = Frame(frame, height=500, width=20)
     frame_1.pack(side = LEFT)
-    #frame_2 = Frame(frame, height=500, width=20)
-    #frame_2.pack(side = LEFT)
+    frame_2 = Frame(root, height=500, width=1500, bg = '#3dbde0')
+    frame_2.place(x = 0, y = 750)
     label = Label(frame_1, text='Кликните на ингредиенты которих у вас нету:', font='Calibri 14 bold italic')
     # label.place(x = 50, y = 20)
     label.pack()
@@ -58,7 +62,7 @@ def sorting(event):
                     if list[0:2:1] == 'Для':
                         lab1 = Label()
                     check = Button(frame_1, text=list, width = 60, bg = '#3dbde0', font = 'Calibri 13 italic')
-                    check.pack()
+                    check.pack(side = TOP)
                     list = file.readline()
                     list = list.rstrip('\n')
 
@@ -79,19 +83,21 @@ def sorting(event):
                     check.bind('<Double-Button-1>', returning)
     file = open(filename + c + '.txt')
     file = file.read()
-    text_recipe = Text(root, wrap = WORD, width = 80, height = 40)
+    label_title = Label(root, text = c, font = 'Calibri 18 bold', fg = 'white', bg = 'black')
+    label_title.place(x = 600, y = 5)
+    text_recipe = Text(root, wrap = WORD, width = 60, height = 25)
     text_recipe.insert(1.0, file)
     button_ok = Button(root, text='Выйти', bg = '#3dbde0', font = 'Calibri 14 bold')
     button_ok.bind('<Button-1>', exit)
-    button_ok.place(x = 1100, y = 750)
-    lab = Label(frame_1, text = 'А вот что надо докупить:', font = 'Calibri 14 bold italic')
-    lab.pack()
-    text = Text(frame_1, width = 55, height = 13)
-    text.pack()
-    text_recipe.place(x = 750, y = 50)
+    button_ok.place(x = 1325, y = 5)
+    lab = Label(root, text = 'А вот что надо докупить:', font = 'Calibri 14 bold italic')
+    lab.place(x = 800, y = 475)
+    text = Text(root, width = 55, height = 13)
+    text.place(x = 800, y = 520)
+    text_recipe.place(x = 800, y = 60)
     button_search = Button(root, text = 'Заказать недостающие продукты', bg = '#3dbde0', font = 'Calibri 14 bold')
     button_search.bind('<Button-1>', buy_products)
-    button_search.place(x = 1100, y= 800)
+    button_search.place(x = 1025, y= 5)
 
 def file_title(event):
     '''Функция которая показывает список текстовых файлов в папке - список рецептов выбранной категории'''

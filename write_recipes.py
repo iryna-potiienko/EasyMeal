@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from tkinter import *
 '''Файл с функцией для создания своего собственного рецепта'''
 def create_recipe(event):
@@ -40,6 +41,9 @@ def create_recipe(event):
     root.geometry('800x800+200+0')
     root.title('EasyMeal')
 
+    frame_2 = Frame(root, width = 1000, height = 300, bg = '#3dbde0')
+    frame_2.place(x = 0, y = 740)
+
     label_1 = Label(root, text = 'Название рецепта:', font = 'Calibri 13 bold italic')
     entry_1 = Entry(root, width = 50)
     label_1.pack()
@@ -54,7 +58,7 @@ def create_recipe(event):
     frame.pack()
 
     label_3 = Label(root, text = 'Ингредиенты:', font = 'Calibri 13 bold italic')
-    text_1 = Text(root, width = 40, height = 20, wrap = WORD)
+    text_1 = Text(root, width = 40, height = 12, wrap = WORD)
     #ingredients = text_1.get(1.0, END)
     #text_1.tag_add(ingredients, '1.0', END)
     #text_1.insert(1.0, ingredients)
@@ -83,17 +87,17 @@ def create_recipe(event):
 
     label_5 = Label(root, text = 'Способ приготовления:', font = 'Calibri 13 bold italic')
     text_2 = Text(root, width = 70, height = 20, wrap = WORD)
-    scr = Scrollbar(root, command=text_2.yview)
-    text_2.configure(yscrollcommand=scr.set)
-    scr.pack()
+    #scr = Scrollbar(root, command=text_2.yview)
+    #text_2.configure(yscrollcommand=scr.set)
+    #scr.pack()
 
     text_2.mark_set('Способ приготовления:', 2.0)
     text_2.mark_gravity('Способ приготовления:', RIGHT)
-    label_5.place(x =260, y = 430)
-    text_2.place(x = 40, y = 460)
+    label_5.place(x = 260, y = 300)
+    text_2.place(x = 40, y = 330)
 
     button = Button(root, text = 'Сохранить рецепт', bg = '#3dbde0', font = 'Calibri 12 bold italic')
-    button.place(x = 630, y = 750)
+    button.place(x = 630, y = 650)
 
     button_1 = Button(root, text = 'OK', bg = '#3dbde0', font = 'Calibri 12 bold ')
     button_1.place(x = 600, y = 240)
