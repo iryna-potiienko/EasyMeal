@@ -29,7 +29,7 @@ def sorting(event):
     global list, a, sos, b
     c = event.widget['text']
     root = Toplevel()
-    root.iconbitmap('logo end.png')
+    #root.iconbitmap('logo end.png')
     root.title('EasyMeal')
     root.wm_state('zoomed')
     frame = Frame(root, height = 1000, width = 20)
@@ -38,7 +38,7 @@ def sorting(event):
     frame_1.pack(side = LEFT)
     #frame_2 = Frame(frame, height=500, width=20)
     #frame_2.pack(side = LEFT)
-    label = Label(frame_1, text='Кликните на ингредиенты которих у вас нету:', font='Calibri 14 italic')
+    label = Label(frame_1, text='Кликните на ингредиенты которих у вас нету:', font='Calibri 14 bold italic')
     # label.place(x = 50, y = 20)
     label.pack()
 
@@ -84,6 +84,8 @@ def sorting(event):
     button_ok = Button(root, text='Выйти', bg = '#3dbde0', font = 'Calibri 14 bold')
     button_ok.bind('<Button-1>', exit)
     button_ok.place(x = 1100, y = 750)
+    lab = Label(frame_1, text = 'А вот что надо докупить:', font = 'Calibri 14 bold italic')
+    lab.pack()
     text = Text(frame_1, width = 55, height = 13)
     text.pack()
     text_recipe.place(x = 750, y = 50)
