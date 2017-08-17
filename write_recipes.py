@@ -40,6 +40,7 @@ def create_recipe(event):
     root = Toplevel()
     root.geometry('800x800+200+0')
     root.title('EasyMeal')
+    root.iconbitmap('logog.ico')
 
     frame_2 = Frame(root, width = 1000, height = 300, bg = '#3dbde0')
     frame_2.place(x = 0, y = 740)
