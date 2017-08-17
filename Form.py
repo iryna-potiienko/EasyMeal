@@ -3,7 +3,6 @@ import write_recipes
 from os import listdir
 from os.path import isfile
 from os.path import join as joinpath
-import codecs
 #import ImageTkInter   # Добавить гиперлынк (кнопка заказать товары)
                                 # Вставить логотип
 from tkinter import *       # Проблемы с расширением
@@ -47,9 +46,7 @@ def sorting(event):
     # label.place(x = 50, y = 20)
     label.pack()
 
-    file = codecs.open(filename + c + '.txt', "r", "utf_8_sig")
-    #file = file.unicode(file, 'utf-8').encode('cp1251')
-    #file.close()
+    file = open(filename + c + '.txt')
     #a = file.readline(1.0)
     #file.delete(1.0, 2.0)
     #for i, list in enumerate(file):
@@ -63,15 +60,17 @@ def sorting(event):
                     if list == a or list == b:
                         lab = Label(root)
                     if list[0:2:1] == 'Для':
-                        lab1 = Label(root)
+                        lab1 = Label()
                     check = Button(frame_1, text=list, width = 60, bg = '#3dbde0', font = 'Calibri 13 italic')
                     check.pack(side = TOP)
                     list = file.readline()
                     list = list.rstrip('\n')
 
+
                     def change(event):   # при нажатии на кнопку она станет красной и продукт появится в текстовом поле внизу
                         global a
                         event.widget['bg'] = 'red'
+                        print(event.widget['text'])
                         text.insert(END, event.widget['text'])
                         text.insert(END, '\n')
 
@@ -82,8 +81,7 @@ def sorting(event):
 
                     check.bind('<Button-1>', change)
                     check.bind('<Double-Button-1>', returning)
-    file = codecs.open( filename + c + '.txt', "r", "utf_8_sig" )
-    #file = open(filename + c + '.txt')
+    file = open(filename + c + '.txt')
     file = file.read()
     label_title = Label(root, text = c, font = 'Calibri 18 bold', fg = 'white', bg = 'black')
     label_title.place(x = 600, y = 5)

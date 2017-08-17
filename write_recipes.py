@@ -2,21 +2,6 @@
 from tkinter import *
 '''Файл с функцией для создания своего собственного рецепта'''
 def create_recipe(event):
-    def save(event):
-        '''Функция которая принимает и сохраняет данные с текстовых полей для ингредиентов и способа приготовления блюда'''
-        global title
-        title = entry_1.get()
-        file = open(fileway + title + '.txt', 'x')    # аргумент х позволяет создать новый файл и записать туда полученый текст
-
-        text_ingredients = text_1.get(1.0, END)
-        text_cooking = text_2.get(1.0,END)
-        file.write(title)
-        file.write('\nИнгредиенты\n')
-        file.write(text_ingredients)
-        file.write('\nСпособ приготовления\n')
-        file.write(text_cooking)
-        file.close()
-
     def category(event):
         '''Функция которая в зависимости от выбраной радиокнопки определяет категорию, а тойсть путь сохранения файла'''
         a = var.get()
@@ -33,6 +18,21 @@ def create_recipe(event):
             fileway = 'Рецепты/Десерты/'
         elif a == 5:
             fileway = 'Рецепты/Напитки/'
+
+    def save(event):
+        '''Функция которая принимает и сохраняет данные с текстовых полей для ингредиентов и способа приготовления блюда'''
+        global title
+        title = entry_1.get()
+        file = open(fileway + title + '.txt', 'x')    # аргумент х позволяет создать новый файл и записать туда полученый текст
+
+        text_ingredients = text_1.get(1.0, END)
+        text_cooking = text_2.get(1.0,END)
+        file.write(title)
+        file.write('\nИнгредиенты\n')
+        file.write(text_ingredients)
+        file.write('\nСпособ приготовления\n')
+        file.write(text_cooking)
+        file.close()
 
     def close(event):   # функция которая закрывает окно
         root.destroy()
